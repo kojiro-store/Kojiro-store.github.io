@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmation de Paiement</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      padding: 20px;
+      text-align: center;
+    }
+    .confirmation {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      margin-top: 50px;
+    }
+    input {
+      padding: 10px;
+      font-size: 1em;
+      width: 80%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="confirmation">
+  <h1>Confirmation de Paiement</h1>
+  <p>Entrez votre code de téléchargement :</p>
+  <input type="text" id="codeSaisi" placeholder="Exemple : 123456">
+  <br>
+  <button onclick="verifierCode()">Valider</button>
+</div>
+
+<script>
+  // Liste des codes et fichiers associés
+  const fichiers = {
+    "123456": "files/beat-sx.STY",
+    "789101": "produits/Produit_B.zip",
+    "111213": "produits/Produit_C.zip"
+    // Tu ajoutes autant de codes et fichiers que tu veux
+  };
+
+  function verifierCode() {
+  let codeEntre = document.getElementById('codeSaisi').value.trim();
+  if (fichiers.hasOwnProperty(codeEntre)) {
+    alert("Code correct ! Préparation du téléchargement...");
+    localStorage.setItem('fichierAtelecharger', fichiers[codeEntre]); // Stocke l'URL
+    localStorage.removeItem('panier'); // Vider le panier
+    window.location.href = 'telechargement.html'; // Aller vers la page de téléchargement
+  } else {
+    alert("Code incorrect. Veuillez réessayer !");
+  }
+}
+</script>
+
+</body>
+</html>

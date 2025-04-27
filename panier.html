@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Votre Panier</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: linear-gradient(90deg, #ffe, #f2f2f2);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #contenuPanier {
+      margin-top: 30px;
+      background: #777;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      flex: 1;
+    }
+    .produitPanier {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .produitPanier button {
+      padding: 5px 10px;
+      font-size: 0.9em;
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    #totalPanier {
+      margin-top: 20px;
+      text-align: right;
+      font-size: 1.2em;
+      color: #555;
+    }
+    #payerBtn {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 1em;
+      color: white;
+      background: #28a745;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #payerBtn:hover {
+      background: #218838;
+    }
+    nav {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    nav a {
+      text-decoration: none;
+      font-size: 1.1em;
+      color: #555;
+      margin-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="produit.html">Produits</a>
+    <a href="panier.html">🛒 Panier</a>
+  </nav>
+
+  <h1>Votre Panier</h1>
+
+  <div id="contenuPanier">
+    <!-- Les produits du panier apparaîtront ici -->
+  </div>
+
+  <div id="totalPanier">
+    <!-- Total ici -->
+  </div>
+
+  <button id="payerBtn" onclick="payer()">Payer</button>
+
+  <script>
+    // Charger le panier
+    let panier = JSON.parse(localStorage.getItem('panier')) || [];
+
+    function afficherPanier() {
+      const contenu = document.getElementById('contenuPanier');
+      const totalDiv = document.getElementById('totalPanier');
+      contenu.innerHTML = '';
+
+      let total = 0;
+
+      panier.forEach((produit, index) => {
+        const div = document.createElement('div');
+        div.classList.add('produitPanier');
+        div.innerHTML = `
+          <div>
+            <strong>${produit.nom}</strong>
+            <br> Prix unitaire: ${produit.prix} Fcfa
+          </div>
+          <div>
+            <span>1x ${produit.prix} Fcfa</span>
+            <button onclick="supprimerProduit(${index})">Supprimer</button>
+          </div>
+        `;
+        contenu.appendChild(div);
+        total += produit.prix;
+      });
+
+      totalDiv.innerHTML = `<h3>Total : ${total} Fcfa</h3>`;
+    }
+
+    function supprimerProduit(index) {
+      if (confirm("Voulez-vous vraiment supprimer cet article du panier ?")) {
+        panier.splice(index, 1);
+        localStorage.setItem('panier', JSON.stringify(panier));
+        afficherPanier();
+      }
+    }
+
+    function payer() {
+      if (panier.length === 0) {
+        alert("Votre panier est vide !");
+      } else {
+        const total = panier.reduce((sum, produit) => sum + produit.prix, 0);
+        // Rediriger vers la page de paiement avec le montant total comme paramètre
+        window.location.href = `paiement.html?total=${total}`; // Redirection vers paiement avec le total
+      }
+    }
+
+    afficherPanier();
+  </script>
+
+</body>
+</html>

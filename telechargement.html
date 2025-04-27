@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Téléchargement du Produit</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e6f7ff;
+      padding: 20px;
+      text-align: center;
+    }
+    .telechargement {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-top: 50px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="telechargement">
+  <h1>Votre téléchargement est prêt</h1>
+  <p>Merci pour votre achat ! Cliquez ci-dessous pour télécharger votre produit :</p>
+  <button id="btnTelecharger">Télécharger</button>
+</div>
+
+<script>
+  // Récupérer l'URL du fichier à télécharger stockée dans localStorage
+  const urlFichier = localStorage.getItem('fichierAtelecharger');
+
+  document.getElementById('btnTelecharger').addEventListener('click', function() {
+    if (urlFichier) {
+      window.location.href = urlFichier;
+      localStorage.removeItem('fichierAtelecharger'); // Nettoyer après téléchargement
+    } else {
+      alert("Erreur : aucun fichier à télécharger !");
+    }
+  });
+</script>
+
+</body>
+</html>

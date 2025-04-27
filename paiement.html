@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Paiement</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: linear-gradient(90deg, #ffe, #f2f2f2);
+      min-height: 100vh;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+    .instructions {
+      margin-top: 30px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .step {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .important {
+      background: #ffefc1;
+      padding: 10px;
+      border-left: 4px solid #ffc107;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    nav {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    nav a {
+      text-decoration: none;
+      font-size: 1.1em;
+      color: #555;
+      margin-left: 20px;
+    }
+    button {
+      margin-top: 30px;
+      display: block;
+      padding: 12px 20px;
+      background: #28a745;
+      color: white;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="produit.html">Produits</a>
+    <a href="panier.html">🛒 Panier</a>
+  </nav>
+
+  <h1>Procédure de Paiement</h1>
+
+  <div class="instructions">
+    <h2>Comment payer votre commande ?</h2>
+
+    <div class="step">
+      1. Ouvrez votre téléphone et tapez le code suivant :<br><br>
+      <strong>#150*46*0196241#</strong><br><br>
+      (où <strong>0196241</strong> est notre code marchand officiel)
+    </div>
+
+    <div class="step">
+      2. Entrez le <strong>montant exact</strong> correspondant à votre commande.
+    </div>
+
+    <div class="step">
+      3. Validez votre paiement en suivant les instructions affichées sur votre téléphone.
+    </div>
+
+    <div class="important">
+      Important : Conservez votre message de confirmation de paiement Orange Money. Il vous servira de preuve en cas de besoin.
+    </div>
+
+    <h2 style="margin-top: 40px;">Comment recevoir votre produit après paiement ?</h2>
+
+    <div class="step">
+      - Une fois votre paiement confirmé, revenez sur notre site.<br><br>
+      - Votre commande sera automatiquement validée.<br><br>
+      - Vous pourrez télécharger votre produit ou recevoir votre livraison selon le type d'article acheté.
+    </div>
+
+    <div class="step">
+      - En cas de souci, contactez notre service client avec votre reçu de paiement pour une assistance rapide.
+    </div>
+
+    <button onclick="telecharger()">Télécharger vos fichiers</button>
+  </div>
+
+  <script>
+    function telecharger() {
+      window.location.href = "confirmation.html";
+    }
+  </script>
+
+</body>
+</html>
