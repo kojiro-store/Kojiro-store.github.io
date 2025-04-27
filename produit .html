@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Nos Produits - Kojiro Store</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Times, sans-serif;
+      background-image: url('images/Fond2.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      margin: 20px;
+      border-radius: 10px;
+      overflow: auto;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      width: 100%;
+      position: relative;
+      bottom: 0;
+    }
+
+    .produits {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .produit {
+      width: 220px;
+      margin: 10px;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      position: relative;
+    }
+
+    .produit img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .produit button {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: transform 0.2s ease;
+    }
+
+    .produit button:hover {
+      transform: scale(1.1);
+      background-color: #ff4081;
+    }
+
+    .panier {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .panier img {
+      width: 50px;
+      height: 50px;
+    }
+
+    #compteur {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: red;
+      color: white;
+      font-size: 12px;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .animation {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1000;
+      transition: transform 0.7s ease-in-out, opacity 0.7s ease-in-out;
+    }
+  </style>
+</head>
+
+<body>
+<main>
+
+  <h1>Nos Produits</h1>
+  <h2>Découvrez nos produits exceptionnels !</h2>
+
+  <div class="produits">
+    <div class="produit" data-fichier="fichiers/pdf-piano.pdf" data-price="1000">
+      <img src="images/produit1.jpg" alt="Produit 1">
+      <p>Document PDF pour apprendre le piano</p>
+      <p>Prix : 1000 Fcfa</p>
+      <button onclick="ajouterAuPanier('Document PDF pour apprendre le piano', 1000, 'fichiers/pdf-piano.pdf')">Ajouter au panier</button>
+    </div>
+
+    <div class="produit" data-fichier="fichiers/beat-yamaha-e.sty" data-price="3000">
+      <img src="images/produit2.jpg" alt="Produit 2">
+      <p>Beats Yamaha modèle 'E'</p>
+      <p>Prix : 3000 Fcfa</p>
+      <button onclick="ajouterAuPanier('Beats Yamaha modèle E', 3000, 'fichiers/beat-yamaha-e.zip')">Ajouter au panier</button>
+    </div>
+
+    <div class="produit" data-fichier="fichiers/beat-sx.sty" data-price="3500">
+      <img src="images/produit3.jpg" alt="Produit 3">
+      <p>Beats Yamaha modèles 'S' et 'SX'</p>
+      <p>Prix : 3500 Fcfa</p>
+      <button onclick="ajouterAuPanier('Beats Yamaha modèles S et SX', 3500, 'fichiers/beat-sx.zip')">Ajouter au panier</button>
+    </div>
+  </div>
+
+</main>
+
+<!-- Icône Panier -->
+<button class="panier" onclick="window.location.href='panier.html'">
+  <img src="images/panier.jpg" alt="Panier">
+  <div id="compteur">0</div>
+</button>
+
+<footer>
+  <div class="footer-content">
+    <p>© 2025 Kojiro Store. Tous droits réservés.</p>
+    <div class="footer-links">
+      | <a href="contact.html">Contact</a> |
+    </div>
+  </div>
+</footer>
+
+<script>
+  let panierCount = 0;
+
+  function ajouterAuPanier(nomProduit, prixProduit, fichierProduit) {
+    // Animation de vol vers panier
+    const imgProduit = event.target.parentElement.querySelector('img');
+    const imgClone = imgProduit.cloneNode(true);
+    const panier = document.querySelector('.panier');
+
+    const rect = imgProduit.getBoundingClientRect();
+    imgClone.style.position = 'fixed';
+    imgClone.style.left = rect.left + 'px';
+    imgClone.style.top = rect.top + 'px';
+    imgClone.style.width = '100px';
+    imgClone.classList.add('animation');
+    document.body.appendChild(imgClone);
+
+    setTimeout(() => {
+      const panierRect = panier.getBoundingClientRect();
+      imgClone.style.transform = `translate(${panierRect.left - rect.left}px, ${panierRect.top - rect.top}px) scale(0.1)`;
+      imgClone.style.opacity = '0';
+    }, 10);
+
+    setTimeout(() => {
+      imgClone.remove();
+    }, 800);
+
+    // Mise à jour panier
+    let panierData = JSON.parse(localStorage.getItem('panier')) || [];
+    let indexProduit = panierData.findIndex(item => item.nom === nomProduit);
+    if (indexProduit > -1) {
+      panierData[indexProduit].quantite += 1;
+    } else {
+      panierData.push({ nom: nomProduit, prix: prixProduit, quantite: 1, fichier: fichierProduit });
+    }
+    localStorage.setItem('panier', JSON.stringify(panierData));
+
+    panierCount++;
+    document.getElementById('compteur').textContent = panierCount;
+  }
+</script>
+
+</body>
+</html>

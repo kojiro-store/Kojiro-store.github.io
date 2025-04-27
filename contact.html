@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact - Ma Boutique</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  body {
+  background: linear-gradient(90deg,#ffe45f,#ffa89f);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  font-family: 'Times', sans-serif;
+  background: linear-gradient(90deg,#ffa99f,#f9f9f9);
+  color: #333;
+  text-align: center;
+  padding-top: 70px;
+}
+  .contact {
+    color: white;
+    font-family: 'Georgina';
+    display: inline-block;
+  width: 180px;
+  margin: 10px;
+  padding: 10px;
+  background: black;
+  border-radius: 15px;
+  box-shadow: 5 5 20px rgba(0,0,0,0.1);
+}
+  .btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+  footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Contactez-nous</h1>
+  <nav>
+    <a href="index.html">Accueil</a> |
+    <a href="produit .html">Produits</a> |
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="contact">
+  <form action="#" method="POST" class="contact-form">
+    <label for="name">Nom :</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">E-mail :</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Message :</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit" class="btn">Envoyer</button>
+  </form>
+</main>
+
+<footer>
+  <p>&copy; 2025 Ma Boutique - Tous droits réservés</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

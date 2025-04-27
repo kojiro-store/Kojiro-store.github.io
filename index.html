@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Kojiro Store</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  body {
+  margin: 0;
+  font-family: 'Times', sans-serif;
+  background: linear-gradient(150deg, #555,#f9f9f9);
+  color: #333;
+}
+
+header {
+  background-image: url('images/fond1.jpg');
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #ffe29f, #ffa99f);
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(150deg, #f9f9f9,#ff4081);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Bienvenue dans Kojiro Store !</h1>
+  <nav>
+    <a href="index.html" class="btn">Accueil</a>
+    <a href="produit .html" class="btn">Produits</a>
+    <a href="contact.html" class="btn">Contact</a>
+  </nav>
+</header>
+  
+<section class="hero">
+  <h3>Découvrez nos produits incroyables !</h3>
+  <a href="produit .html" class="btn">Voir les Produits</a>
+</section>
+
+<footer>
+  <p>&copy; 2025 Ma Boutique - Tous droits réservés</p>
+</footer>
+
+<script src="script.js">
+  <button id="welcomeButton">Cliquez pour un message</button>
+  console.log("Bienvenue dans le site !");
+  function ajouterAuPanier(nomProduit, prixProduit, imageElement) {
+  let panier = JSON.parse(localStorage.getItem('panier')) || [];
+
+  // Chercher si le produit existe déjà
+  const produitExistant = panier.find(p => p.nom === nomProduit);
+  if (produitExistant) {
+    produitExistant.quantite++;
+  } else {
+    panier.push({ nom: nomProduit, prix: prixProduit, quantite: 1 });
+  }
+
+  localStorage.setItem('panier', JSON.stringify(panier));
+
+  // Le reste du code pour l'animation
+  const panierIcone = document.getElementById('panier');
+  const imgClone = imageElement.cloneNode(true);
+  imgClone.style.position = 'absolute';
+  imgClone.style.top = imageElement.getBoundingClientRect().top + 'px';
+  imgClone.style.left = imageElement.getBoundingClientRect().left + 'px';
+  imgClone.style.width = imageElement.offsetWidth + 'px';
+  imgClone.style.height = imageElement.offsetHeight + 'px';
+  imgClone.style.zIndex = 1000;
+  imgClone.style.transition = 'all 1s ease-in-out';
+  document.body.appendChild(imgClone);
+
+  const panierRect = panierIcone.getBoundingClientRect();
+
+  setTimeout(() => {
+    imgClone.style.top = panierRect.top + 'px';
+    imgClone.style.left = panierRect.left + 'px';
+    imgClone.style.width = '0px';
+    imgClone.style.height = '0px';
+    imgClone.style.opacity = '0';
+  }, 50);
+
+  setTimeout(() => {
+    imgClone.remove();
+  }, 1050);
+}
+  </script>
+</body>
+</html>
